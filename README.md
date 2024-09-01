@@ -27,9 +27,9 @@ propiedades y métodos deberían ser públicos y cuáles privados.
 * `EliminarPedido(Pedido pedido)`: Elimina un pedido de la lista
 
 **Métodos de la clase Cadetería**
-* `AgregarCadete(Cadete cadete)`: Agrega un cadete a la lista de cadetes.
-* `EliminarCadete(Cadete cadete)`: Elimina un cadete de la lista
 * `MostrarInforme()`: muestra el monto ganado y la cantidad de envios por cadete.
+* `AsignarPedido(Pedido pedido, Cadete cadete)`: Asigna un pedido a un cadete.
+* `ReasignarPedido(Pedido pedido, Cadete cadete)`: Reasigna un pedido a un cadete.
 ***
 **Atributos, propiedades y métodos públicos y privados**
 
@@ -38,16 +38,17 @@ propiedades y métodos deberían ser públicos y cuáles privados.
 * **Atributos y propiedades privados:** nombre, direccion, telefono, datosReferencia.
 * **Atributos y propiedades públicas:** Nombre, Direccion, Telefono, DatosReferencias (todos deberian ser getters)
 
+
 **Clase Pedidos**
 * **Atributos y propiedades privados:** nro, obs, cliente, estado.
 * **Atributos y propiedades públicas:** Nro, Obs, Estado.
 * **Métodos publicos:** VerDireccionCliente, VerDatosCliente.
+* **Métodos privados:** AgregarCliente.
 
 **Clase Cadete**
 * **Atributos y propiedades privados:** id, nombre, direccion, telefono, listadoPedidos
 * **Atributos y propiedades públicas:** Id, Nombre, Direccion, Telefono, ListadoPedidos
-* **Métodos publicos:** JornalACobrar.
-* **Métodos privados:** AgregarPedido, EliminarPedido.
+* **Métodos publicos:** JornalACobrar, AgregarPedidos, EliminarPedidos.
 
 **Clase Cadeteria**
 * **Atributos y propiedades privados:** nombre, telefono, listadoCadetes.
@@ -58,6 +59,6 @@ propiedades y métodos deberían ser públicos y cuáles privados.
 
 **Constructores**
 * **Clase Cliente:** `Cliente(string nombre, string direccion, int telefono string datosReferenciaDireccion)`
-* **Clase Pedidos:** `Pedido(int nro, string obs, Estado estado)`
+* **Clase Pedidos:** `Pedido(int nro, string obs)`
 * **Clase Cadete:** `Cadete(int id, string nombre, string direccion, int telefono)`
-* **Clase Cadeteria:** `Cadeteria(string nombre, string telefono)`
+* **Clase Cadeteria:** `Cadeteria(string nombre, string telefono, lista<cadete> listadoCadete)`
