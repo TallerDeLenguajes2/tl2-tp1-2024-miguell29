@@ -53,8 +53,7 @@ propiedades y métodos deberían ser públicos y cuáles privados.
 **Clase Cadeteria**
 * **Atributos y propiedades privados:** nombre, telefono, listadoCadetes.
 * **Atributos y propiedades públicas:** Nombre, Telefono, ListadoCadetes.
-* **Métodos publicos:** MostrarInforme
-* **Métodos privados:** AgregarCadete, EliminarCadete.
+* **Métodos publicos:** MostrarInforme, AsifnarPedido, ReAsignarPedido.
 ***
 
 **Constructores**
