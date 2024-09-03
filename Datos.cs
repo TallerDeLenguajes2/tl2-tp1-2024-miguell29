@@ -4,11 +4,15 @@ class Datos
     {
         try
         {
-            var file = "./csv/cadetes.csv";
+            var file = "csv/cadetes.csv";
             var pathFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,file);
             if (File.Exists(pathFile))
             {
                 var cadetesCsv = File.ReadAllLines(pathFile);
+                if (cadetesCsv.Length == 0)
+                {
+                    throw new Exception();
+                }
                 var cadetes = new List<Cadete>{};
 
                 foreach (var cadeteCsv in cadetesCsv)
@@ -24,7 +28,7 @@ class Datos
                 return cadetes;
             }else
             {
-                Console.WriteLine("'cadete.csv' -> No encontrado");
+                Console.WriteLine("'cadetes.csv' -> No encontrado");
                 return null;
             }
         }
