@@ -1,4 +1,4 @@
-enum Estado
+public enum Estado
 {
     EnPreparacion,
     Preparado,

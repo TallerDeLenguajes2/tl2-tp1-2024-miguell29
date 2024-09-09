@@ -1,4 +1,4 @@
-class Pedido
+public class Pedido
 {
     private int Nro;
     private string obs;

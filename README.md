@@ -61,3 +61,9 @@ propiedades y métodos deberían ser públicos y cuáles privados.
 * **Clase Pedidos:** `Pedido(int nro, string obs)`
 * **Clase Cadete:** `Cadete(int id, string nombre, string direccion, int telefono)`
 * **Clase Cadeteria:** `Cadeteria(string nombre, string telefono, lista<cadete> listadoCadete)`
+
+
+***
+**Otra forma**
+
+Se me ocurre que deberia existir una clase extra como por ejemplo Sistema, que reciba la informacion de la cadeteria y los cadetes, y que esta clase sea la que presente los datos por pantalla.

@@ -1,6 +1,5 @@
-using System.Runtime.InteropServices;
 
-class Cadeteria
+public class Cadeteria
 {
     private string nombre;
     private int telefono;

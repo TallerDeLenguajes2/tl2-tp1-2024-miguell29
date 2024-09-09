@@ -1,4 +1,4 @@
-class Menu
+public class Menu
 {
     public static void Dibujar(){
         Console.WriteLine(@"_______
