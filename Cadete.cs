@@ -30,6 +30,7 @@ public class Cadete
     public void AgregarPedido(Pedido pedido)
     {
         ListadoPedidos.Add(pedido);
+        pedido.Estado = Estado.EnCamino;
     }
     public void EliminarPedido(Pedido pedido)
     {

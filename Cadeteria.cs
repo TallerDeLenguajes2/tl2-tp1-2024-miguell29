@@ -18,14 +18,26 @@ public class Cadeteria
 
     public void MostrarInforme()
     {
-
+        Console.WriteLine("Nombre de la cadeteria: " + nombre);
+        Console.WriteLine("Cantidad de envios por cadetes:");
+        int pedidosEntregados = 0;
+        foreach (var item in listadoCadetes)
+        {
+            int envios = item.ListadoPedidos.Where(x => x.Estado == Estado.Entregado).Count();
+            Console.WriteLine($"El cadete: {item.Nombre}, entregó {envios} pedidos");
+            pedidosEntregados += envios;
+        }
+        Console.WriteLine($"Total de envios: {pedidosEntregados}");
+        Console.WriteLine($"Promedio de envios por cadete: {pedidosEntregados / listadoCadetes.Count}");
+        Console.WriteLine($"Monto ganado: ${pedidosEntregados * 500}");
     }
     public void AsignarPedido(Pedido pedido, Cadete cadete)
     {
-
+        cadete.AgregarPedido(pedido);
     }
-    public void ReasignarPedido(Pedido pedido, Cadete cadete)
+    public void ReasignarPedido(Pedido pedido, Cadete cadete1, Cadete cadete2)
     {
-
+        cadete1.EliminarPedido(pedido);
+        cadete2.AgregarPedido(pedido);
     }
 }

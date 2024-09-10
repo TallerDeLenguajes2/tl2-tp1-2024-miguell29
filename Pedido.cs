@@ -1,11 +1,11 @@
 public class Pedido
 {
-    private int Nro;
+    private int nro;
     private string obs;
     private Cliente cliente;
     private Estado estado;
 
-    public Pedido(int nro, string obs, Estado estado = Estado.EnPreparacion)
+    public Pedido(int nro, string obs = "ninguna", Estado estado = Estado.EnPreparacion)
     {
         AgregarCliente();
         Nro = nro;
@@ -13,7 +13,7 @@ public class Pedido
         this.estado = estado;
     }
 
-    public int Nro1 { get => Nro; set => Nro = value; }
+    public int Nro { get => nro; set => nro = value; }
     public string Obs { get => obs; set => obs = value; }
     public Cliente Cliente { get => cliente; set => cliente = value; }
     public Estado Estado { get => estado; set => estado = value; }
@@ -33,6 +33,7 @@ public class Pedido
     ***");
     }
     private void AgregarCliente(){
+        Console.WriteLine(@"*Datos de cliente*");
         Console.WriteLine("Ingrese el nombre");
         var nombre = Console.ReadLine();
         Console.WriteLine("Ingrese la direccion");

@@ -6,6 +6,7 @@ public class Menu
             (2) Asignar Pedido a cadete.
             (3) Cambiar estado de pedido.
             (4) Reasignar pedido
+            (5) Mostrar Informe
             (0) salir
             selecciona una opcion.
 _______");

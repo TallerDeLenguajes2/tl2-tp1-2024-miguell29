@@ -13,7 +13,7 @@ if (listadoCadetes == null || cadeteria == null)
 }else
 {
     Console.WriteLine(@"->            BIENVENIDO            <-");
-    Sistema sistema = new Sistema(listadoCadetes, cadeteria);
+    var sistema = new Sistema(listadoCadetes, cadeteria);
     sistema.Init();
 
 }
