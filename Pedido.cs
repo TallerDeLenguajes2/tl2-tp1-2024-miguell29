@@ -34,14 +34,15 @@ public class Pedido
         Datos de Referencia: {cliente.DatosReferenciaDireccion}
     ***");
     }
-    private void AgregarCliente(){
+    private void AgregarCliente()
+    {
         Console.WriteLine(@"*Datos de cliente*");
         Console.WriteLine("Ingrese el nombre");
         var nombre = Console.ReadLine();
         Console.WriteLine("Ingrese la direccion");
         var direccion = Console.ReadLine();
         Console.WriteLine("Ingrese el telefono");
-        if(int.TryParse(Console.ReadLine(),out var telefono))
+        if (!int.TryParse(Console.ReadLine(), out var telefono)) Console.WriteLine("error al ingresar el numero");
         Console.WriteLine("Ingrese algun dato de Referencia");
         var datosReferencia = Console.ReadLine();
         cliente = new Cliente(nombre, direccion, telefono, datosReferencia);

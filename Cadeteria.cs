@@ -4,7 +4,7 @@ public class Cadeteria
     private string nombre;
     private int telefono;
     private List<Cadete> listadoCadetes;
-    private List<Pedido> listadoPedidos = null;
+    private List<Pedido> listadoPedidos = [];
 
     public Cadeteria(string nombre, int telefono, List<Cadete> listadoCadetes)
     {
@@ -25,24 +25,14 @@ public class Cadeteria
         int pedidosEntregados = 0;
         foreach (var item in listadoCadetes)
         {
-            int envios = ListadoPedidos.Where(x => x.Cadete.Id == item.Id && x.Estado == Estado.Entregado).Count();
+            var envios = ListadoPedidos.Where(x => x.Cadete.Id == item.Id && x.Estado == Estado.Entregado).Count();
             Console.WriteLine($"El cadete: {item.Nombre}, entregó {envios} pedidos");
             pedidosEntregados += envios;
         }
         Console.WriteLine($"Total de envios: {pedidosEntregados}");
-        Console.WriteLine($"Promedio de envios por cadete: {pedidosEntregados / listadoCadetes.Count}");
+        Console.WriteLine($"Promedio de envios por cadete: {((float)pedidosEntregados / listadoCadetes.Count):2f}");
         Console.WriteLine($"Monto ganado: ${pedidosEntregados * 500}");
     }
-    public void AsignarPedido(Pedido pedido, Cadete cadete)
-    {
-        //cadete.AgregarPedido(pedido);
-    }
-    public void ReasignarPedido(Pedido pedido, Cadete cadete1, Cadete cadete2)
-    {
-       // cadete1.EliminarPedido(pedido);
-       // cadete2.AgregarPedido(pedido);
-    }
-
     public void JornalACobrar(int idCadete)
     {
         int total = ListadoPedidos.Where(x => x.Cadete.Id == idCadete && x.Estado == Estado.Entregado).Count() * 500;
@@ -52,17 +42,18 @@ public class Cadeteria
 
     public void AsignarCadeteAPedido(int idCadete, int idPedido)
     {
-        Cadete cadete = listadoCadetes.FirstOrDefault(cadete  => cadete.Id == idCadete);
+        Cadete cadete = listadoCadetes.FirstOrDefault(cadete => cadete.Id == idCadete);
         Pedido pedido = listadoPedidos.FirstOrDefault(pedido => pedido.Nro == idPedido);
-        if ( cadete != null && pedido != null)
-        {   
-            
+        if (cadete != null && pedido != null)
+        {
+
             if (pedido.Cadete != cadete)
             {
                 pedido.Cadete = cadete;
                 pedido.Estado = Estado.EnCamino;
             }
-        }else
+        }
+        else
         {
             Console.WriteLine("Error - Intente de nuevo");
         }
