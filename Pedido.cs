@@ -4,6 +4,7 @@ public class Pedido
     private string obs;
     private Cliente cliente;
     private Estado estado;
+    private Cadete cadete;
 
     public Pedido(int nro, string obs = "ninguna", Estado estado = Estado.EnPreparacion)
     {
@@ -17,6 +18,7 @@ public class Pedido
     public string Obs { get => obs; set => obs = value; }
     public Cliente Cliente { get => cliente; set => cliente = value; }
     public Estado Estado { get => estado; set => estado = value; }
+    public Cadete Cadete { get => cadete; set => cadete = value; }
 
     public void VerDireccionCliente()
     {

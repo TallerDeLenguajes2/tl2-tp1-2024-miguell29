@@ -3,13 +3,14 @@ using System.Runtime.InteropServices;
 public class Sistema
 {
     private Cadeteria cadeteria;
-    private List<Pedido> listadoPedidos = new List<Pedido>();
+    private List<Pedido> listadoPedidos;
     private int idPedido = 1;
 
     public Sistema(List<Cadete> listadoCadetes, Cadeteria cadeteria)
     {   
         Cadeteria = cadeteria;
         cadeteria.ListadoCadetes = listadoCadetes;
+        listadoPedidos = Cadeteria.ListadoPedidos;
     }
 
     public Cadeteria Cadeteria { get => cadeteria; set => cadeteria = value; }
@@ -169,33 +170,39 @@ public class Sistema
                 Console.WriteLine($"idPedido: {item.Nro} -- cliente: {item.Cliente.Nombre}");
             }
             Console.WriteLine("ingrese el id del pedido que desea seleccionar");
-                    if (int.TryParse(Console.ReadLine(), out var idPedidoSeleccionado)){
-                        var pedido = pedidosAsignados.FirstOrDefault(x => x.Nro == idPedidoSeleccionado);
-                        var cadete1 = cadeteria.ListadoCadetes.FirstOrDefault(x => x.ListadoPedidos.Contains(pedido));
-                       
-                        Console.WriteLine("Seleccione al cadete que desea reasignar");
-                        foreach (var item in cadeteria.ListadoCadetes)
-                        {
-                            if (item != cadete1)
-                            {
-                                Console.WriteLine($"id:  {item.Id} -- nombre: {item.Nombre}");
-                            }
-                        }
-                        Console.WriteLine("ingrese el id del cadete");
-                        if (int.TryParse(Console.ReadLine(), out var idCadeteSeleccionado)){
-                            var cadete2 = cadeteria.ListadoCadetes.FirstOrDefault(x => x.Id == idCadeteSeleccionado);
-                            if (cadete2 != null){
-                                cadeteria.ReasignarPedido(pedido, cadete1, cadete2);
-                            }else
-                            {
-                                Console.WriteLine("ocurrio un error, intente de nuevo");
-                            }
-                        }
-                    }else
+            if (int.TryParse(Console.ReadLine(), out var idPedidoSeleccionado))
+            {
+                var pedido = pedidosAsignados.FirstOrDefault(x => x.Nro == idPedidoSeleccionado);
+                var cadete1 = pedido.Cadete;
+
+                Console.WriteLine("Seleccione al cadete que desea reasignar");
+                foreach (var item in cadeteria.ListadoCadetes)
+                {
+                    if (item != cadete1)
                     {
-                        Console.WriteLine("Ocurrio un error intente de nuevo");
-                    };
-        }else
+                        Console.WriteLine($"id:  {item.Id} -- nombre: {item.Nombre}");
+                    }
+                }
+                Console.WriteLine("ingrese el id del cadete");
+                if (int.TryParse(Console.ReadLine(), out var idCadeteSeleccionado))
+                {
+                    var cadete2 = cadeteria.ListadoCadetes.FirstOrDefault(x => x.Id == idCadeteSeleccionado);
+                    if (cadete2 != null)
+                    {
+                        cadeteria.ReasignarPedido(pedido, cadete1, cadete2);
+                    }
+                    else
+                    {
+                        Console.WriteLine("ocurrio un error, intente de nuevo");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ocurrio un error intente de nuevo");
+            };
+        }
+        else
         {
             Console.WriteLine("No hay pedidos para reasignar");
         }
