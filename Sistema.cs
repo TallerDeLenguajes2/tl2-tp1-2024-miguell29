@@ -52,7 +52,7 @@ public class Sistema
                     Console.ReadKey(true);
                     break;
                 case 5:
-                    cadeteria.MostrarInforme();
+                    MostrarInforme();
                     Console.WriteLine("Presione una tecla para continuar");
                     Console.ReadKey(true);
                     break;
@@ -68,7 +68,10 @@ public class Sistema
 
     private void AltaPedido()
     {
-        listadoPedidos.Add(new Pedido(idPedido++));
+        var Cliente = AgregarCliente();
+        var pedido = new Pedido(idPedido++);
+        pedido.Cliente = Cliente;
+        listadoPedidos.Add(pedido);
     }
     private void AsignarPedido()
     {
@@ -93,11 +96,7 @@ public class Sistema
                 if (int.TryParse(Console.ReadLine(), out var idCadeteSeleccionado))
                 {
                     var cadete = cadeteria.ListadoCadetes.FirstOrDefault(x => x.Id == idCadeteSeleccionado);
-                    if (cadete != null)
-                    {
-                        cadeteria.AsignarCadeteAPedido(cadete.Id, pedido.Nro);
-                    }
-                    else
+                    if (cadete == null || !cadeteria.AsignarCadeteAPedido(cadete.Id, pedido.Nro))
                     {
                         Console.WriteLine("ocurrio un error, intente de nuevo");
                     }
@@ -127,7 +126,8 @@ public class Sistema
                 if (item.Cadete != null)
                 {
                     Console.WriteLine($"id: {item.Nro} -- cliente: {item.Cliente.Nombre} -- Estado: {item.Estado} -- Cadete: {item.Cadete.Nombre}");
-                }else
+                }
+                else
                 {
                     Console.WriteLine($"id: {item.Nro} -- cliente: {item.Cliente.Nombre} -- Estado: {item.Estado}");
                 }
@@ -217,11 +217,7 @@ public class Sistema
                 if (int.TryParse(Console.ReadLine(), out var idCadeteSeleccionado))
                 {
                     var cadete2 = cadeteria.ListadoCadetes.FirstOrDefault(x => x.Id == idCadeteSeleccionado);
-                    if (cadete2 != null)
-                    {
-                        cadeteria.AsignarCadeteAPedido(idCadeteSeleccionado, pedido.Nro);
-                    }
-                    else
+                    if (cadete2 == null || !cadeteria.AsignarCadeteAPedido(idCadeteSeleccionado, pedido.Nro))
                     {
                         Console.WriteLine("ocurrio un error, intente de nuevo");
                     }
@@ -241,4 +237,39 @@ public class Sistema
             Console.WriteLine("No hay pedidos para reasignar");
         }
     }
+    private Cliente AgregarCliente()
+    {
+        Console.WriteLine(@"*Datos de cliente*");
+        Console.WriteLine("Ingrese el nombre");
+        var nombre = Console.ReadLine();
+        Console.WriteLine("Ingrese la direccion");
+        var direccion = Console.ReadLine();
+        Console.WriteLine("Ingrese el telefono");
+        if (!int.TryParse(Console.ReadLine(), out var telefono)) Console.WriteLine("error al ingresar el numero");
+        Console.WriteLine("Ingrese algun dato de Referencia");
+        var datosReferencia = Console.ReadLine();
+        return new Cliente(nombre, direccion, telefono, datosReferencia);
+    }
+    public void MostrarInforme()
+    {
+        Console.WriteLine("Nombre de la cadeteria: " + cadeteria.Nombre);
+        Console.WriteLine("Cantidad de envios por cadetes:");
+        int pedidosEntregados = 0;
+        int pedidosSinAsignar = 0;
+        foreach (var item in cadeteria.ListadoCadetes)
+        {
+            var listadoPedidosAsignados = listadoPedidos.Where(x => x.Cadete != null);
+            pedidosSinAsignar = listadoPedidos.Where(x => x.Cadete == null).Count();
+            var envios = listadoPedidosAsignados.Where(x => x.Cadete.Id == item.Id && x.Estado == Estado.Entregado).Count();
+            Console.WriteLine($"El cadete: {item.Nombre}, entregó {envios} pedidos");
+            pedidosEntregados += envios;
+        }
+        Console.WriteLine($"Total de pedidos: {listadoPedidos.Count}");
+
+        Console.WriteLine($"Total de envios entregados: {pedidosEntregados}");
+        Console.WriteLine($"Promedio de envios por cadete: {(float)pedidosEntregados / cadeteria.ListadoCadetes.Count}");
+        Console.WriteLine($"Monto ganado: ${pedidosEntregados * 500}");
+        Console.WriteLine($"Pedidos sin entregar: {pedidosSinAsignar}");
+    }
+
 }

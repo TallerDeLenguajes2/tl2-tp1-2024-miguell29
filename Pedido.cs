@@ -8,7 +8,6 @@ public class Pedido
 
     public Pedido(int nro, string obs = "ninguna", Estado estado = Estado.EnPreparacion)
     {
-        AgregarCliente();
         Nro = nro;
         this.obs = obs;
         this.estado = estado;
@@ -24,27 +23,15 @@ public class Pedido
     {
         Console.WriteLine(@$"   Cliente: {cliente.Nombre}   -   Direccion: {cliente.Direccion}");
     }
-    public void VerDatosCliente()
+    public string VerDatosCliente()
     {
-        Console.WriteLine(@$"***
-            Datos Del Cliente:
-        Nombre: {cliente.Nombre}
-        Direccion: {cliente.Direccion}
-        Telefono: {cliente.Telefono}
-        Datos de Referencia: {cliente.DatosReferenciaDireccion}
-    ***");
+        return @$"Nombre: {cliente.Nombre}
+Direccion: {cliente.Direccion}
+Telefono: {cliente.Telefono}
+Datos de Referencia: {cliente.DatosReferenciaDireccion}";
     }
-    private void AgregarCliente()
+    private void AgregarCliente(string nombre, string direccion, int telefono, string datosReferencia)
     {
-        Console.WriteLine(@"*Datos de cliente*");
-        Console.WriteLine("Ingrese el nombre");
-        var nombre = Console.ReadLine();
-        Console.WriteLine("Ingrese la direccion");
-        var direccion = Console.ReadLine();
-        Console.WriteLine("Ingrese el telefono");
-        if (!int.TryParse(Console.ReadLine(), out var telefono)) Console.WriteLine("error al ingresar el numero");
-        Console.WriteLine("Ingrese algun dato de Referencia");
-        var datosReferencia = Console.ReadLine();
         cliente = new Cliente(nombre, direccion, telefono, datosReferencia);
     }
 }
