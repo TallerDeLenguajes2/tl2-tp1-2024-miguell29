@@ -1,11 +1,11 @@
-class Datos
+public class AccesoCSV : AccesoADatos
 {
-    public static List<Cadete> GetCadetes()
+    public override List<Cadete> GetCadetes()
     {
         try
         {
             var file = "csv/cadetes.csv";
-            var pathFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,file);
+            var pathFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, file);
             if (File.Exists(pathFile))
             {
                 var cadetesCsv = File.ReadAllLines(pathFile);
@@ -13,7 +13,7 @@ class Datos
                 {
                     throw new Exception();
                 }
-                var cadetes = new List<Cadete>{};
+                var cadetes = new List<Cadete> { };
 
                 foreach (var cadeteCsv in cadetesCsv)
                 {
@@ -26,19 +26,20 @@ class Datos
                     cadetes.Add(new Cadete(id, nombre, direccion, telefono));
                 }
                 return cadetes;
-            }else
+            }
+            else
             {
                 Console.WriteLine("'cadetes.csv' -> No encontrado");
                 return null;
             }
         }
-        catch (System.Exception)
+        catch (Exception)
         {
             Console.WriteLine("ERROR AL LEER DATOS DE 'cadete.csv'");
             return null;
         }
     }
-    public static Cadeteria GetCadeteria()
+    public override Cadeteria GetCadeteria()
     {
         try
         {
@@ -48,14 +49,15 @@ class Datos
             {
                 var cadeteriaCsv = File.ReadAllLines(pathFile);
                 var cadeteria = cadeteriaCsv[0].Split(",");
-                return new Cadeteria(cadeteria[0],int.Parse(cadeteria[1]), null);
-            }else
+                return new Cadeteria(cadeteria[0], int.Parse(cadeteria[1]), null);
+            }
+            else
             {
                 Console.WriteLine("'cadeteria.csv' -> No encontrado");
                 return null;
             }
         }
-        catch (System.Exception)
+        catch (Exception)
         {
             Console.WriteLine("ERROR AL LEER DATOS DE 'cadeteria.csv'");
             return null;
